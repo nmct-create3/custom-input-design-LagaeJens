@@ -67,6 +67,14 @@
     /*  = 48px */
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3);
     /*  = 72px */
+    /* inputs */
+    --global-input-backgroundColor: White;
+    --global-input-color: var(--global-color-neutral-xxxx-dark);
+    --global-input-borderColor: var(--global-color-neutral-xxx-light);
+    --global-input-hover-borderColor: var(--global-color-neutral-xx-light);
+    --global-input-focus-borderColor: var(--global-color-alpha);
+    --global-input-boxShadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+
 }
 
 /*------------------------------------*\
@@ -611,16 +619,25 @@ input::placeholder {
     padding: calc(var(--global-baseline) * 1.5 - var(--global-borderWidth)) var(--global-whitespace-md);
     outline: none;
     transition: border var(--global-transition-timing-alpha);
+    border: var(--global-borderWidth) solid var(--global-input-borderColor);
+    background-color: var(--global-input-backgroundColor);
+    color: var(--global-input-color);
 }
 
 .c-input:hover {
     border-color: var(--global-color-neutral-xx-light);
+    border: var(--global-borderWidth) solid var(--global-input-borderColor);
+    background-color: var(--global-input-backgroundColor);
+    color: var(--global-input-color);
 }
 
 .c-input:focus,
 .c-input:active {
     border-color: var(--global-color-alpha);
     box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+    border: var(--global-borderWidth) solid var(--global-input-borderColor);
+    background-color: var(--global-input-backgroundColor);
+    color: var(--global-input-color);
 }
 
 /* option input for checkboxes and radio buttons */
@@ -679,6 +696,120 @@ input::placeholder {
     background-color: var(--global-color-alpha-dark);
     box-shadow: none;
 }
+
+/* label svg {
+    display: none;
+}
+
+.c-option--hidden:checked+label svg {
+    display: flex;
+} */
+
+.c-option--hidden:checked+.c-custom-option {
+    /*
+    Do magic stuff here, for example:*/
+}
+
+.c-option--hidden:checked+.c-custom-option .c-custom-option__symbol {
+    /*
+    Do magic stuff here, for example: */
+    opacity: 1;
+    fill: var(--global-color-alpha);
+
+}
+
+.c-custom-option {
+    display: flex;
+}
+
+/* .c-custom-option__fake-input--checkbox:hover {
+    cursor: pointer;
+    border: var(--global-borderWidth) solid var(--global-color-alpha);
+    box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
+}
+
+.c-custom-option:active {} */
+
+.c-custom-option__fake-input {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    border: var(--global-borderWidth) solid var(--global-color-neutral-xx-light);
+    margin-right: 8px;
+}
+
+.c-custom-option__fake-input--checkbox {
+    display: flex;
+    border-radius: 3px;
+}
+
+.c-custom-option__fake-input--radio {
+    display: flex;
+    border-radius: 100%;
+}
+
+.c-custom-option__symbol {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.c-custom-option__fake-input--checkbox .c-custom-option__symbol {
+    width: 10px 10px;
+    display: flex;
+    fill: var(--global-color-alpha)
+}
+
+.c-custom-option__fake-input--radio .c-custom-option__symbol {
+    height: 6px;
+    width: 6px;
+    border-radius: 100%;
+    display: flex;
+    margin: auto;
+    background-color: var(--global-color-alpha);
+}
+
+.c-custom-option__fake-input--radio:hover+.c-custom-option__symbol {
+    cursor: pointer;
+    border: var(--global-borderWidth) solid var(--global-color-neutral-x-dark);
+}
+
+.c-option--hidden:hover+.c-custom-option .c-custom-option__fake-input {
+    border: var(--global-borderWidth) solid var(--global-color-neutral-x-dark);
+    /* box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent); */
+}
+
+.c-option-list {
+    margin-bottom: 24px;
+}
+
+.c-option-list__item {
+    margin-bottom: 12px;
+}
+
+.c-custom-toggle__fake-input {
+    height: 24px;
+    width: 48px;
+    border-radius: 25px;
+    fill: var(--global-color-alpha-dark);
+    display: flex;
+    background-color: var(--global-color-neutral-xxxx-light);
+    border: var(--global-borderWidth) solid var(--global-color-neutral-x-dark);
+}
+
+.c-custom-toggle__fake-input::after {
+    content: '';
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    margin: 1px;
+    background-color: var(--global-color-alpha);
+    transition: all 200ms;
+}
+
+.c-label--option+.c-option--hidden:checked+.c-custom-toggle__fake-input {
+    background-color: var(--global-color-alpha-light);
+}
+
 
 /*------------------------------------*\
 #UTILITIES
@@ -1083,11 +1214,11 @@ No media query since this is the default in mobile first design
     }
 
     a[href]:after {
-        content: " (" attr(href) ")";
+        content: " ("attr(href) ")";
     }
 
     abbr[title]:after {
-        content: " (" attr(title) ")";
+        content: " ("attr(title) ")";
     }
 
     /*
